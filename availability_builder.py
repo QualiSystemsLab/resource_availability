@@ -62,7 +62,7 @@ class ResourceAvailability(object):
                     temp_d = self.reservation_report[device_name]
 
                     # fill it out
-                    temp_d['Name'].append(each.ResourceFullName)
+                    temp_d['Name'].append(each.ReservationName)
                     temp_d['Owner'].append(each.Owner)
                     temp_d['Start'].append(each.StartTime)
                     temp_d['End'].append(each.EndTime)
