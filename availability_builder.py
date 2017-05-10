@@ -10,7 +10,7 @@ class ResourceAvailability(object):
 
     def __init__(self):
         # declarations
-        self.reservation_report = {}
+        self.reservation_report = []
 
         # load configs.json
         self.json_file_path = 'configs.json'
@@ -39,6 +39,11 @@ class ResourceAvailability(object):
         except CloudShellAPIError:
             return False
 
+    def _convert_to_ISO8601(self, dts_in=''):
+        date, time = dts_in.split(' ', 1)
+        MM, DD, YYYY = date.split('/')
+        return '%s-%s-%s %s' % (YYYY, MM, DD, time)
+
     def get_reservations(self, device_name, start_time='', end_time=''):
         """
         
@@ -50,26 +55,39 @@ class ResourceAvailability(object):
                                                                        endTime=end_time,
                                                                        showAllDomains=True).Resources
 
+        # for item in item_list:
+        #     if '/' not in item.Name:
+        #         for each in item.Reservations:
+        #             keys = self.reservation_report.keys()
+        #             if device_name not in keys:
+        #                 self.reservation_report[device_name] = {'Name': [], 'Owner': [], 'Start': [], 'End': [],
+        #                                                         'ID': []}
+        #
+        #             # pull from master dict
+        #             temp_d = self.reservation_report[device_name]
+        #
+        #             # fill it out
+        #             temp_d['Name'].append(each.ReservationName)
+        #             temp_d['Owner'].append(each.Owner)
+        #             temp_d['Start'].append(each.StartTime)
+        #             temp_d['End'].append(each.EndTime)
+        #             temp_d['ID'].append(each.ReservationId)
+        #
+        #             # return it to master
+        #             self.reservation_report[device_name] = temp_d
+
         for item in item_list:
-            if '/' not in item.Name:
+            if item.FullName == device_name:
+                temp_d = dict()
+                temp_d['category'] = device_name
+                temp_d['segments'] = []
                 for each in item.Reservations:
-                    keys = self.reservation_report.keys()
-                    if device_name not in keys:
-                        self.reservation_report[device_name] = {'Name': [], 'Owner': [], 'Start': [], 'End': [],
-                                                                'ID': []}
-
-                    # pull from master dict
-                    temp_d = self.reservation_report[device_name]
-
-                    # fill it out
-                    temp_d['Name'].append(each.ReservationName)
-                    temp_d['Owner'].append(each.Owner)
-                    temp_d['Start'].append(each.StartTime)
-                    temp_d['End'].append(each.EndTime)
-                    temp_d['ID'].append(each.ReservationId)
-
-                    # return it to master
-                    self.reservation_report[device_name] = temp_d
+                    inner = dict()
+                    inner['start'] = self._convert_to_ISO8601(each.StartTime)
+                    inner['end'] = self._convert_to_ISO8601(each.EndTime)
+                    inner['task'] = '%s owned by: %s (%s)' % (each.ReservationName, each.Owner, each.ReservationId)
+                    temp_d['segments'].append(inner)
+                self.reservation_report.append(temp_d)
 
     def get_availability(self, resource_list=[], start_time='DD/MM/YYYY HH:MM', end_time='DD/MM/YYYY HH:MM'):
         # --TBD--
