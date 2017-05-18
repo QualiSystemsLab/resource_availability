@@ -1,6 +1,6 @@
 {
   "who_am_i": "resource_availability_py",
-  "cloudshell_server": "localhost",
+  "cloudshell_server": "ksaper.homeip.net",
   "cs_admin_username": "admin",
   "cs_admin_password": "YWRtaW4=",
   "cs_domain": "Global",
@@ -28,7 +28,7 @@
                     "GenericServer": 1
                     },
   "metric_default": 5,
-  "sql_server_address": "localhost\\QUALISYSTEMS2008",
+  "sql_server_address": "ksaper.homeip.net\\QUALISYSTEMS2008",
   "sql_server_user": "sa",
   "sql_server_password": "cXVhbGklMTIzNA0K",
   "sql_database": "sandbox",
