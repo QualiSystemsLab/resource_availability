@@ -1,7 +1,36 @@
 {
   "who_am_i": "resource_availability_py",
-  "cloudshell_server": "qualias-eqx-01.force10networks.com",
+  "cloudshell_server": "localhost",
   "cs_admin_username": "admin",
   "cs_admin_password": "YWRtaW4=",
-  "cs_domain": "Global"
+  "cs_domain": "Global",
+  "start_offset": 0,
+  "end_offset": 2592000,
+  "fam_model_list": [
+                      "CS_ComputeServer,GenericServer"
+                    ],
+  "metric_lookup": {
+                    "CS_ComputeServer":1
+                    },
+  "metric_lookup_default": 5,
+  "report_headers":[
+                    "ReservationID",
+                    "ReservationName",
+                    "ReservationOwner",
+                    "ReservationStart",
+                    "ReservationEnd",
+                    "ItemName",
+                    "ItemFamily",
+                    "ItemModel",
+                    "Metric"
+                    ],
+  "metric_rating": {
+                    "GenericServer": 1
+                    },
+  "metric_default": 5,
+  "sql_server_address": "localhost\\QUALISYSTEMS2008",
+  "sql_server_user": "sa",
+  "sql_server_password": "cXVhbGklMTIzNA0K",
+  "sql_database": "sandbox",
+  "sql_table": "Gantt"
 }
