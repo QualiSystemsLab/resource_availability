@@ -1,36 +1,13 @@
 {
   "who_am_i": "resource_availability_py",
-  "cloudshell_server": "ksaper.homeip.net",
-  "cs_admin_username": "admin",
-  "cs_admin_password": "YWRtaW4=",
+  "cloudshell_server": "localhost",
+  "cs_admin_username": "myuser",
+  "cs_admin_password": "bXlwYXNzd29yZA==",
   "cs_domain": "Global",
   "start_offset": 0,
   "end_offset": 2592000,
+  "gantt_data": "./resource_availability_gantt.json",
   "fam_model_list": [
                       "CS_ComputeServer,GenericServer"
-                    ],
-  "metric_lookup": {
-                    "CS_ComputeServer":1
-                    },
-  "metric_lookup_default": 5,
-  "report_headers":[
-                    "ReservationID",
-                    "ReservationName",
-                    "ReservationOwner",
-                    "ReservationStart",
-                    "ReservationEnd",
-                    "ItemName",
-                    "ItemFamily",
-                    "ItemModel",
-                    "Metric"
-                    ],
-  "metric_rating": {
-                    "GenericServer": 1
-                    },
-  "metric_default": 5,
-  "sql_server_address": "172.16.215.210\\QUALISYSTEMS2008",
-  "sql_server_user": "sa",
-  "sql_server_password": "cXVhbGklMTIzNA0K",
-  "sql_database": "sandbox",
-  "sql_table": "Gantt"
+                    ]
 }
