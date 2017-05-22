@@ -19,35 +19,35 @@ print '  End Time: %s' % unit.end_time
 # else:
 #     print 'Free will is an illusion'
 
-# unit._clear_sql_table()
+unit._clear_sql_table()
 
-# unit._open_sql_connection()
-#
-# sql_line = 'INSERT INTO [%s] VALUES (' % unit.configs['sql_table']
-# sql_line += "'Test Reservation ID',"
-# sql_line += "'Test Reservation Name',"
-# sql_line += "'Test Reservation Owner',"
-# sql_line += "'2017-05-18 20:00',"
-# sql_line += "'2017-05-18 22:00',"
-# sql_line += "'s6000-1000',"
-# sql_line += "'Test Family',"
-# sql_line += "'Test Model',"
-# sql_line += "'5')"
-#
-# unit.sql_cursor.execute(sql_line)
-# unit.sql_connection.commit()
-#
-# unit._clear_sql_table()
-#
-# for h in unit.configs['report_headers']:
-#     if ('Start' in h) or ('End' in h):
-#         unit.reservation_report[h].append('2017-02-14 12:34:00')
-#     elif h == 'Metric':
-#         unit.reservation_report[h].append(42)
-#     else:
-#         unit.reservation_report[h].append('Test')
-#
-# unit.write_to_sql()
+unit._open_sql_connection()
+
+sql_line = 'INSERT INTO [%s] VALUES (' % unit.configs['sql_table']
+sql_line += "'Test Reservation ID',"
+sql_line += "'Test Reservation Name',"
+sql_line += "'Test Reservation Owner',"
+sql_line += "'2017-05-18 20:00',"
+sql_line += "'2017-05-18 22:00',"
+sql_line += "'s6000-1000',"
+sql_line += "'Test Family',"
+sql_line += "'Test Model',"
+sql_line += "'5')"
+
+unit.sql_cursor.execute(sql_line)
+unit.sql_connection.commit()
+
+unit._clear_sql_table()
+
+for h in unit.configs['report_headers']:
+    if ('Start' in h) or ('End' in h):
+        unit.reservation_report[h].append('2017-02-14 12:34:00')
+    elif h == 'Metric':
+        unit.reservation_report[h].append(42)
+    else:
+        unit.reservation_report[h].append('Test')
+
+unit.write_to_sql()
 
 unit.get_availability()
 
