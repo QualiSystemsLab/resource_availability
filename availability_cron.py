@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from availability_builder import ResourceAvailability
 
 
