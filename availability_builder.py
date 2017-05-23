@@ -1,8 +1,11 @@
 import cloudshell.api.cloudshell_api as cs_api
-from cloudshell.api.common_cloudshell_api import CloudShellAPIError
 import json
+import os
 import time
+
 from base64 import b64decode
+from cloudshell.api.common_cloudshell_api import CloudShellAPIError
+
 
 class ResourceAvailability(object):
     def __init__(self):
@@ -15,8 +18,9 @@ class ResourceAvailability(object):
         self.sql_cursor = None
 
         # load configs.json
-        self.json_file_path = './configs.json'
-        self.configs = json.loads(open(self.json_file_path).read())
+        config_path = os.path.dirname(__file__)
+        self.json_file = '%s/configs.json' % config_path
+        self.configs = json.loads(open(self.json_file).read())
 
         # connect to CloudShell
         try:
