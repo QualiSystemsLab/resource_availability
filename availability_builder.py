@@ -4,6 +4,7 @@ import json
 import time
 from base64 import b64decode
 
+
 class ResourceAvailability(object):
     def __init__(self):
         # declarations
@@ -25,9 +26,14 @@ class ResourceAvailability(object):
                                                           b64decode(self.configs["cs_admin_password"]),
                                                           domain=self.configs["cs_domain"], port=8029)
         except CloudShellAPIError as e:
-            msg = self._get_dts() + '\n Critical Error connecting to CloudShell' + \
-                  '\n' + self.configs["who_am_i"] + ' attempting to start CloudShell API Session' + \
-                  '\nServer: ' + self.configs["cloudshell_server"]
+            msg = "%s\n" \
+                  "Critical Error connecting to CloudShell\n" \
+                  "%s attempting to start CloudShell API Session\n" \
+                  "Server: %s" % (
+                      self._get_dts(),
+                      argv[0],
+                      self.param['cloudshell_server'])
+
             print '%s\n%s' % (msg, e.message)
             # self._send_email('Error connecting to CloudShell', msg)
 
@@ -37,18 +43,6 @@ class ResourceAvailability(object):
         :return: time.strftime: Current Time in ISO8601
         """
         return time.strftime('%Y-%m-%d %H:%M:%S')
-
-    def _resource_exists(self, device_name):
-        """
-        Boolean query to see if a device exists in inventory
-        :param string device_name: the name of the device to query 
-        :return: boolean 
-        """
-        try:
-            self.cs_session.GetResourceDetails(resourceFullPath=device_name)
-            return True
-        except CloudShellAPIError:
-            return False
 
     def _convert_to_ISO8601(self, dts_in=''):
         """
@@ -87,6 +81,8 @@ class ResourceAvailability(object):
                     inner['end'] = self._convert_to_ISO8601(each.EndTime)
                     inner['task'] = '%s owned by: %s (%s)' % (each.ReservationName, each.Owner, each.ReservationId)
                     temp_d['segments'].append(inner)
+
+                temp_d['segments'] = sorted(temp_d['segments'], key=lambda k: k['end'], reverse=True)
                 self.reservation_report.append(temp_d)
 
     def generate_resource_list(self):
@@ -127,8 +123,10 @@ class ResourceAvailability(object):
         self.generate_start_end_time()
         self.generate_resource_list()
         for resource in self.resource_list:
-            if self._resource_exists(resource.Name):
+            try:
                 self.get_reservations(device_name=resource.Name, start_time=self.start_time, end_time=self.end_time)
+            except CloudShellAPIError as err:
+                raise Exception(err.message)
 
         amchart_json = json.dumps(self.reservation_report,
                                   sort_keys=False,
