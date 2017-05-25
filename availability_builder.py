@@ -13,6 +13,7 @@ class ResourceAvailability(object):
         # declarations
         self.reservation_report = []  # AmChart
         self.resource_list = []
+        self.resource_by_name = []
         self.start_time = ''
         self.end_time = ''
         self.sql_connection = None
@@ -59,25 +60,25 @@ class ResourceAvailability(object):
         MM, DD, YYYY = date.split('/')
         return '%s-%s-%s %s' % (YYYY, MM, DD, time)
 
-    def get_reservations(self, device_name, start_time='', end_time=''):
+    def get_reservations(self, device_list, start_time='', end_time=''):
         """
         This pulls all reservations for a given device in the listed time range, 
         and add them to the Reservation Report
-        :param string device_name: Full Name of Resource in Question
+        :param list of string device_list: Full Name of Resource in Question
         :param string start_time: Start of search period "DD/MM/YYYY HH:MM" in GMT
         :param string end_time: End of search period "DD/MM/YYYY HH:MM" in GMT
         :rtype: FindResourceListInfo
         """
-        item_list = self.cs_session.GetResourceAvailabilityInTimeRange(resourcesNames=[device_name],
+        item_list = self.cs_session.GetResourceAvailabilityInTimeRange(resourcesNames=device_list,
                                                                        startTime=start_time,
                                                                        endTime=end_time,
                                                                        showAllDomains=True).Resources
 
         # Thi is how do format for AmCharts - requires reservation_report to be a list
         for item in item_list:
-            if item.FullName == device_name:
+            if item.FullName in device_list:
                 temp_d = dict()
-                temp_d['category'] = device_name
+                temp_d['category'] = item.Name
                 temp_d['segments'] = []
                 for each in item.Reservations:
                     inner = dict()
@@ -127,10 +128,12 @@ class ResourceAvailability(object):
         self.generate_start_end_time()
         self.generate_resource_list()
         for resource in self.resource_list:
-            try:
-                self.get_reservations(device_name=resource.Name, start_time=self.start_time, end_time=self.end_time)
-            except CloudShellAPIError as err:
-                raise Exception(err.message)
+            self.resource_by_name.append(resource.Name)
+
+        try:
+            self.get_reservations(device_list=self.resource_by_name, start_time=self.start_time, end_time=self.end_time)
+        except CloudShellAPIError as err:
+            raise Exception(err.message)
 
         amchart_json = json.dumps(self.reservation_report,
                                   sort_keys=False,

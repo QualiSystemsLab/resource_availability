@@ -1,0 +1,82 @@
+[
+    {
+        "category": "AUS_01",
+        "segments": []
+    },
+    {
+        "category": "AUS_02",
+        "segments": [
+            {
+                "start": "2017-05-27 19:00",
+                "task": "Sample Compute Span owned by: admin (ae67acb4-9f19-4889-8934-59dc9ec837c9)",
+                "end": "2017-05-27 22:00"
+            },
+            {
+                "start": "2017-05-26 19:00",
+                "task": "Sample Compute Span owned by: admin (66ad9854-254a-4564-9552-97f951d8a4c4)",
+                "end": "2017-05-26 22:00"
+            },
+            {
+                "start": "2017-05-25 19:00",
+                "task": "Sample Compute Span owned by: admin (387e5995-f4cd-478c-83d0-6dd2add8c53f)",
+                "end": "2017-05-25 22:00"
+            }
+        ]
+    },
+    {
+        "category": "AUS_03",
+        "segments": []
+    },
+    {
+        "category": "IRE_01",
+        "segments": []
+    },
+    {
+        "category": "IRE_02",
+        "segments": [
+            {
+                "start": "2017-05-27 19:00",
+                "task": "Sample Compute Span owned by: admin (ae67acb4-9f19-4889-8934-59dc9ec837c9)",
+                "end": "2017-05-27 22:00"
+            },
+            {
+                "start": "2017-05-26 19:00",
+                "task": "Sample Compute Span owned by: admin (66ad9854-254a-4564-9552-97f951d8a4c4)",
+                "end": "2017-05-26 22:00"
+            },
+            {
+                "start": "2017-05-25 19:00",
+                "task": "Sample Compute Span owned by: admin (387e5995-f4cd-478c-83d0-6dd2add8c53f)",
+                "end": "2017-05-25 22:00"
+            }
+        ]
+    },
+    {
+        "category": "IRE_03",
+        "segments": []
+    },
+    {
+        "category": "JPN_01",
+        "segments": []
+    },
+    {
+        "category": "JPN_02",
+        "segments": [
+            {
+                "start": "2017-05-27 19:00",
+                "task": "Sample Compute Span owned by: admin (ae67acb4-9f19-4889-8934-59dc9ec837c9)",
+                "end": "2017-05-27 22:00"
+            },
+            {
+                "start": "2017-05-26 19:00",
+                "task": "Sample Compute Span owned by: admin (66ad9854-254a-4564-9552-97f951d8a4c4)",
+                "end": "2017-05-26 22:00"
+            },
+            {
+                "start": "2017-05-25 19:00",
+                "task": "Sample Compute Span owned by: admin (387e5995-f4cd-478c-83d0-6dd2add8c53f)",
+                "end": "2017-05-25 22:00"
+            }
+        ]
+    }
+]
