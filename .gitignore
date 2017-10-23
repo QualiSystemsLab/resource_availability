@@ -1,0 +1,8 @@
+<<<<<<< HEAD
+
+*.xml
+
+.idea/resource_availability.iml
+=======
+*.pyc
+>>>>>>> origin/amcharts

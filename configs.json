@@ -1,7 +1,13 @@
 {
   "who_am_i": "resource_availability_py",
-  "cloudshell_server": "172.16.215.209",
-  "cs_admin_username": "admin",
-  "cs_admin_password": "YWRtaW4=",
-  "cs_domain": "Global"
+  "cloudshell_server": "localhost",
+  "cs_admin_username": "myuser",
+  "cs_admin_password": "bXlwYXNzd29yZA==",
+  "cs_domain": "Global",
+  "start_offset": 0,
+  "end_offset": 2592000,
+  "gantt_data": "./resource_availability_gantt.json",
+  "fam_model_list": [
+                      "CS_ComputeServer,GenericServer"
+                    ]
 }
